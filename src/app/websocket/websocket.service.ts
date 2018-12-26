@@ -52,12 +52,12 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
       }
     };
 
-    // connection status
+    // Connection status.
     this.status = new Observable<boolean>((observer) => {
       this.connection$ = observer;
     }).pipe(share(), distinctUntilChanged());
 
-    // run reconnect if not connection
+    // Run reconnect if not connection.
     this.statusSub = this.status
       .subscribe((isConnected) => {
         this.isConnected = isConnected;
@@ -79,9 +79,8 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
     this.statusSub.unsubscribe();
   }
 
-
   /*
-  * connect to WebSocked
+  * Connect to WebSocked.
   * */
   private connect(): void {
     this.websocket$ = new WebSocketSubject(this.config);
@@ -96,10 +95,9 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
       });
   }
 
-
   /*
-  * reconnect if not connecting or errors
-  * */
+  * Reconnect if not connecting or errors.
+  **/
   private reconnect(): void {
     this.reconnection$ = interval(this.reconnectInterval)
       .pipe(takeWhile((v, index) => index < this.reconnectAttempts && !this.websocket$));
@@ -118,9 +116,8 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
       });
   }
 
-
   /*
-  * on message event
+  * On message event.
   * */
   public on<T>(event: string): Observable<T> {
     if (event) {
@@ -131,9 +128,8 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
     }
   }
 
-
   /*
-  * on message to server
+  * On message to server.
   * */
   public send(event: string, data: any = {}): void {
     if (event && this.isConnected) {
