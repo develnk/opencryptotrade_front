@@ -10,7 +10,8 @@ import { OrderBookComponent } from './order-book/order-book.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { TradeComponent } from './trade/trade.component';
 import { ChatComponent } from './chat/chat.component';
-import {environment} from '../environments/environment';
+import { environment } from '../environments/environment';
+import * as $ from 'jquery';
 
 @NgModule({
   declarations: [
